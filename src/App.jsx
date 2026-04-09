@@ -13,9 +13,15 @@ const App = () => {
 
       <button className="bg-green-400 px-4 py-2 m-5"
       onClick={async()=>{
-        const data =await fetchVideos('cat')
+        const data =await fetchVideos('dog')
         console.log(data.videos)
       }}>Get Videos</button>
+
+      <button className="bg-green-400 px-4 py-2 m-5"
+      onClick={async()=>{
+        const data =await fetchVideos('cat')
+        console.log(data.videos)
+      }}>Get Gif</button>
     </div>
   )
 }
