@@ -8,21 +8,38 @@ const ResultCard = ({item}) => {
   const addToCollection = (item) =>{
     dispatch(addCollection(item))
     dispatch(addedToast())
-    console.log('saved')
   }
+
+  const isMotionMedia = item.type === 'video' || item.type === 'gif'
+
   return (
-    <div className='w-[18vw] relative h-80 bg-white rounded-xl overflow-hidden'>
-        <a className='h-full' target='_blank' href={item.url}>
-          {item.type == 'photo' ? <img className='h-full w-full object-center' src={item.src} alt=''></img> : ''}
-        {item.type=='video'? <video className='h-full w-full object-center' src={item.src}></video> : ''}
-        {item.type=='gif'? <video className='h-full w-full object-center' autoPlay loop muted src={item.src}></video> : ''}
+    <div className='group relative h-80 overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.35)] transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40'>
+        <a className='block h-full' target='_blank' rel='noreferrer' href={item.url}>
+          {item.type == 'photo' ? (
+            <img className='h-full w-full object-cover transition duration-500 group-hover:scale-105' src={item.src} alt={item.title} />
+          ) : ''}
+          {isMotionMedia ? (
+            <video
+              className='h-full w-full object-cover transition duration-500 group-hover:scale-105'
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload='metadata'
+              poster={item.thumbnail}
+              src={item.src}
+            />
+          ) : ''}
         </a>
-        <div id='bottom' className='flex items-center justify-between gap-2 h-[35%] w-full px-6 absolute bottom-0 text-white'>
-          <h2 className='text-lg font-semibold capitalize h-14 overflow-hidden'>{item.title}</h2>
+        <div className='absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100 backdrop-blur-md'>
+          {item.type}
+        </div>
+        <div id='bottom' className='flex items-end justify-between gap-3 px-5 py-5 absolute inset-x-0 bottom-0 text-white'>
+          <h2 className='line-clamp-2 text-lg font-semibold capitalize text-balance'>{item.title}</h2>
           <button onClick={()=>{
             addToCollection(item)
           }}
-          className='active:scale-95 bg-red-600 text-white rounded px-3 py-1 cursor-pointer font-medium'>Save</button>
+          className='shrink-0 cursor-pointer rounded-full border border-white/15 bg-white/12 px-4 py-2 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20 active:scale-95'>Save</button>
         </div>
     </div>
   )

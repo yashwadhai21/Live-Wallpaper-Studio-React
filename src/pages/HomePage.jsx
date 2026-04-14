@@ -1,6 +1,6 @@
 
 import ResultGrid from '../components/ResultGrid'
-import SearchBar from '../components/searchBar'
+import SearchBar from '../components/SearchBar'
 import Tabs from '../components/Tabs'
 import { useSelector } from 'react-redux'
 const HomePage = () => {
@@ -9,7 +9,7 @@ const HomePage = () => {
 
 
   return (
-    <div>
+    <div className='pb-10'>
 
       <SearchBar/>
       {query !='' ? <div> <Tabs/> <ResultGrid/> </div> : ''}

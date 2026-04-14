@@ -20,13 +20,13 @@ const collectionSlice = createSlice({
         },
         removeCollection:(state,action)=>{
             state.items = state.items.filter(
-                item => item.ud !== action.payload
+                item => item.id !== action.payload
             )
             localStorage.setItem('collection',JSON.stringify(state.items))
 
         },
         clearCollection:(state)=>{
-            state.item = []
+            state.items = []
             localStorage.removeItem('collection')
         }, 
         addedToast:()=>{

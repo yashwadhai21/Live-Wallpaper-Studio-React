@@ -30,3 +30,16 @@ export async function fetchGif(query,per_page=15){
 
     return res.data
 }
+
+export function getPlayableVideoFile(videoFiles = []) {
+    const mp4Files = videoFiles.filter((file) => file.file_type === 'video/mp4')
+
+    if (!mp4Files.length) return ''
+
+    const preferredFile =
+        mp4Files.find((file) => file.width >= 720 && file.width <= 1280) ||
+        mp4Files.find((file) => file.width >= 480) ||
+        mp4Files[0]
+
+    return preferredFile.link
+}
